@@ -1,4 +1,5 @@
 #!groovy​
+#!groovy​
 
 pipeline {
     agent none
@@ -8,11 +9,19 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    stages {
+        stage("Checkout") {
+            agent {
+                label 'master'
+            }
+        
+        }
+
         stage("Up") {
             agent {
                 label 'w64' // this is Windows pipeline
             }
-           
+          
             steps {
                 unstash 'scripts'
                 timeout(time:20, unit:'MINUTES') {

@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage("Checkout") {
-            agent {
-                label 'master'
-            }
-        
-        }
-
         stage("Up") {
             agent {
                 label 'w64' // this is Windows pipeline

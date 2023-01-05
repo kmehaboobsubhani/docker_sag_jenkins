@@ -9,14 +9,9 @@ pipeline {
     }
 
     stages {
-        stage("Checkout") {
-            agent {
-                label 'master'
-            }
+        stage('checkout') {
             steps {
-                checkout scm
-                sh 'git submodule update --init' 
-                stash(name:'scripts', includes:'**')
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/kmehaboobsubhani/SAGProject.git']]])
             }
         }
 
@@ -24,10 +19,7 @@ pipeline {
             agent {
                 label 'w64' // this is Windows pipeline
             }
-            tools {
-                ant "ant-1.9.7"
-                jdk "jdk-1.8"
-            }
+           
             steps {
                 unstash 'scripts'
                 timeout(time:20, unit:'MINUTES') {

@@ -15,9 +15,8 @@ pipeline {
           
             steps {
                 unstash 'scripts'
-                timeout(time:20, unit:'MINUTES') {
-                    bat 'ant up -Dcc=internal -Denv=internal'
-                }
+                bat 'ant up -Dcc=internal -Denv=internal'
+              
             }
             post {
                 success {

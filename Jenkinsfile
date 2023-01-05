@@ -8,13 +8,6 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    stages {
-        stage('checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/kmehaboobsubhani/SAGProject.git']]])
-            }
-        }
-
         stage("Up") {
             agent {
                 label 'w64' // this is Windows pipeline
